@@ -10,4 +10,4 @@ click the button "FILL" and then click drawing board
 
 with vanilla JS
 
-JULY/16/2020
+July/16/2020
