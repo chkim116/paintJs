@@ -3,8 +3,6 @@
 const canvas = document.querySelector("#jsCanvas");
 const ctx = canvas.getContext('2d');
 
-
-
 canvas.width = 700;
 canvas.height = 700;
 
@@ -58,7 +56,6 @@ function changeColor (event) {
     ctx.fillStyle = strokeColors;
 }
 
-
 Array.from(colors).forEach (colors => colors.addEventListener("click", changeColor));
 
 // 
@@ -77,7 +74,9 @@ function handleRange() {
     ctx.lineWidth = strokeSize;
 }
 
-range.addEventListener("input", handleRange);
+if (range) {
+    range.addEventListener("input", handleRange);
+}
 
 // 
 
@@ -89,6 +88,7 @@ let fill = false;
 function fillOn() {
     if (fill !== true) {
         fill = true;
+        ctx.beginPath()
         fillBtn.innerHTML = "PAINT"
     } else {
         fill = false;
@@ -102,13 +102,14 @@ function fillCanvas() {
     }
 }
 
-fillBtn.addEventListener("click", fillOn)
+if (fillBtn) {
+    fillBtn.addEventListener("click", fillOn)
+}
 
 // 오른쪽 마우스 클릭 금지  event명 "contextmenu"
 function noMouseSave (event) {
     event.preventDefault ();
 }
-
 
 // save누르면 이미지 저장
 
@@ -122,4 +123,18 @@ function saveImg() {
     link.click();
 }
 
-save.addEventListener("click", saveImg);
+if (save) {
+    save.addEventListener("click", saveImg);
+}
+
+// remove하면 이미지 삭제
+
+const Remove = document.querySelector("#jsRemove");
+
+function canvasRemove() {
+    ctx.fillStyle = "white"
+    ctx.fillRect (0, 0, 700, 700);
+    changeColor();
+}
+
+Remove.addEventListener("click", canvasRemove);
